@@ -28,7 +28,6 @@ class CommentController extends Controller
     public function create($task_id)
     {
         $tasks = Task::find($task_id);
-        // dd($tasks);
         return view('comment_create', compact('tasks'));
     }
 
@@ -94,6 +93,14 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+    
+        if ($comment->user_id !== Auth::id()) {
+            abort(403); // アクセス拒否
+        }
+    
+        $comment->delete();
+    
+        return redirect()->route('comments.index');
     }
 }

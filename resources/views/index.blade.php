@@ -11,7 +11,7 @@
 <body>
   <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand" href="{{ url('tasks') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -46,6 +46,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                           <a class="dropdown-item" href="{{ route('my_page.show', Auth::user()->id) }}">{{ __('My Page') }}</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
@@ -77,14 +78,32 @@
     <div>{{ $task->user->name }}'s task</div>
     <h1>{{ $task->title }}</h1>
     <p>{{ $task->contents }}</p>
-    <form action="{{ route('tasks.destroy', [$task->id]) }}" method="post">
-      @csrf
-      <input type="submit" value="Delete">
-    </form>
-    <a href="{{ route('tasks.edit', $task) }}">Edit</a>
+
+    @if (Auth::check() && $task->user_id === Auth::id() )
+      <a href="{{ route('tasks.edit', $task) }}">Edit</a>
+      <form action="{{ route('tasks.destroy', $task->id) }}" method="post">
+        @csrf
+        <input type="submit" value="Delete" onclick="return confirm('Do you really want to delete this?');">
+      </form>
+    @endif
 
     <button type="button" onclick="location.href='{{ route('tasks.comments.create', $task->id) }}'">Add a Comment</button>
     <a href="{{ route('tasks.comments.index', $task->id) }}">View Comments</a>
+
+    @if ($task->bookmarkedBy(auth()->user()))
+    <form action="{{ route('bookmark.destroy', $task->bookmarkByUser(auth()->user())) }}" method="POST">
+      @csrf
+      @method('DELETE')
+      <button type="submit">Delete from Bookmarks</button>
+      <i type="submit" class="fa-sharp fa-solid fa-bookmark"></i>
+    </form>
+    @else
+    <form action="{{ route('bookmark.store') }}" method="POST">
+      @csrf
+      <input type="hidden" name="task_id" value="{{ $task->id }}">
+      <button type="submit">Add to Bookmarks</button>
+    </form>
+    @endif
   @endforeach
 </body>
 </html>

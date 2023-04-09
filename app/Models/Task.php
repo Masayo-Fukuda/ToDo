@@ -18,4 +18,19 @@ class Task extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function bookmarkedBy($user)
+    {
+    return $this->bookmarkByUser($user) !== null;
+    }
+
+    public function bookmarkByUser($user)
+    {
+        return $this->bookmarks()->where('user_id', $user->id)->first();
+    }
+    
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
 }

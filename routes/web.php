@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\BookmarksController;
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\MyPageController;
 
 /*
@@ -42,7 +42,7 @@ Route::resource('tasks.comments', CommentController::class)->shallow();
 // Route::post('/comments/store',[CommentController::class, 'store'])->name('comments.store');
 // Route::get('/comments/{id}', [CommentController::class, 'index'])->name('comments.index');
 
-Route::post('/bookmarks', [BookmarksController::class, 'store'])->name('bookmarks.store');
-Route::delete('/bookmarks/{bookmark}', [BookmarksController::class, 'destroy'])->name('bookmarks.destroy');
+Route::post('/bookmark', [BookmarkController::class, 'store'])->name('bookmark.store');
+Route::delete('/bookmark/{bookmark}', [BookmarkController::class, 'destroy'])->name('bookmark.destroy');
 
 Route::get('/my_page/{id}', [MyPageController::class, 'show'])->name('my_page.show');
