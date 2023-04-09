@@ -30,15 +30,17 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/tasks',[TaskController::class, 'index'])->name('tasks.index');
 Route::get('/tasks/create',[TaskController::class, 'create'])->name('tasks.create');
-Route::post('/tasks',[TaskController::class, 'store'])->name('tasks.store');
+Route::post('/tasks/store',[TaskController::class, 'store'])->name('tasks.store');
 Route::get('/tasks/{id}/edit',[TaskController::class, 'edit'])->name('tasks.edit');
-Route::put('/tasks/{id}',[TaskController::class, 'update'])->name('tasks.update');
+Route::put('/tasks/{id}/update',[TaskController::class, 'update'])->name('tasks.update');
 Route::delete('/tasks/{id}',[TaskController::class, 'destroy'])->name('tasks.destroy');
-Route::post('/tasks',[TaskController::class, 'search'])->name('tasks.search');
 
-Route::get('/comments/create/{task_id}',[CommentController::class, 'create'])->name('comments.create');
-Route::post('/comments/store',[CommentController::class, 'store'])->name('comments.store');
-Route::get('/comments/{id}', [CommentController::class, 'index'])->name('comments.index');
+Route::post('/tasks/search',[TaskController::class, 'search'])->name('tasks.search');
+
+Route::resource('tasks.comments', CommentController::class)->shallow();
+// Route::get('/comments/create/{task_id}',[CommentController::class, 'create'])->name('comments.create');
+// Route::post('/comments/store',[CommentController::class, 'store'])->name('comments.store');
+// Route::get('/comments/{id}', [CommentController::class, 'index'])->name('comments.index');
 
 Route::post('/bookmarks', [BookmarksController::class, 'store'])->name('bookmarks.store');
 Route::delete('/bookmarks/{bookmark}', [BookmarksController::class, 'destroy'])->name('bookmarks.destroy');

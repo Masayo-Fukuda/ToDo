@@ -33,15 +33,12 @@ class TaskController extends Controller
         $validator = $request->validate([
             'title' => ['required', 'max:30'],
             'contents' => ['required', 'max:140'],
-            'image_at' => ['required', 'max:8192'],
         ]);
 
         $task = new Task;
         $task -> title = $request ->title;
         $task -> contents = $request -> contents;
         $task -> user_id = Auth::id();
-        $image_path = $request->file('image_at')->store('public/image/');
-        $task->image_at = basename($image_path);
 
         $task -> save();
 
