@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/index.css') }}">
   <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
@@ -64,29 +65,34 @@
     </div>
   </nav>
 
-  <h1>My Page</h1>
-
-  <p>Your Tasks</p>
-  @foreach($tasks as $task)
-  <div>
-    <h1>{{ $task->title }}</h1>
-    <p>{{ $task->contents }}</p>
-    <form action="{{ route('tasks.destroy', [$task->id]) }}" method="post">
-      @csrf
-      <input type="submit" value="Delete">
-    </form>
-    <a href="{{ route('tasks.edit', $task) }}">Edit</a>
-    <a href="{{ route('tasks.comments.index', $task->id) }}">View Comments</a>
+  <div class="title">
+    <p>My Page</p>
   </div>
-  @endforeach
 
-  <p>Your Bookmerks</p>
-  @foreach ($bookmarks as $bookmark)
-    <div>
-      <div>{{ $task->user->name }}'s task</div>
-      <p>Title：{{ $bookmark->task->title }}</p>
-      <p>Content：{{ $bookmark->task->contents }}</p>
+  <div class="task">
+    <h1>Your Tasks</h1>
+    @foreach($tasks as $task)
+    <div class="tasks">
+      <h3>Title:{{ $task->title }}</h3>
+      <p>Content:{{ $task->contents }}</p>
+      <form action="{{ route('tasks.destroy', [$task->id]) }}" method="post">
+        @csrf
+        <input type="submit" value="Delete">
+      </form>
+      <a href="{{ route('tasks.edit', $task) }}">Edit</a>
+      <a href="{{ route('tasks.comments.index', $task->id) }}">View Comments</a>
     </div>
-  @endforeach
+    @endforeach
+
+    <h1>Your Bookmerks</h1>
+    @foreach ($bookmarks as $bookmark)
+      <div class="tasks">
+        <div>{{ $task->user->name }}'s task</div>
+        <h3>Title：{{ $bookmark->task->title }}</h3>
+        <p>Content：{{ $bookmark->task->contents }}</p>
+      </div>
+    @endforeach
+  </div>
+  
 </body>
 </html>

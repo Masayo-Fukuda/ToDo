@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/index.css') }}">
   <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
@@ -63,47 +64,56 @@
         </div>
     </div>
   </nav>
-  <div>
+  <div class="title">
     <p>All Tasks</p>
   </div>
-  <div>
+  <div class="box">
     <a href="{{ route('tasks.create') }}">Create Task</a>
   </div>
-  <form action="{{ route('tasks.index') }}" method="get">
-    <input type="text" name="keyword" value="{{ $keyword }}">
-    <input type="submit" value="Serch">
-  </form>
-  @foreach ($tasks as $task)
-    <img src="{{ asset('storage/images/'. $task->user->avatar) }}" width="100px" alt="">
-    <div>{{ $task->user->name }}'s task</div>
-    <h1>{{ $task->title }}</h1>
-    <p>{{ $task->contents }}</p>
+  <div class="task">
+    
+      @foreach ($tasks as $task)
+        <ul class="tasks">
+          <div class="box">
+            <img id="avatar" src="{{ asset('storage/images/'. $task->user->avatar) }}" width="100px" alt="">
+            <div>{{ $task->user->name }}'s task</div>
+          </div>
 
-    @if (Auth::check() && $task->user_id === Auth::id() )
-      <a href="{{ route('tasks.edit', $task) }}">Edit</a>
-      <form action="{{ route('tasks.destroy', $task->id) }}" method="post">
-        @csrf
-        <input type="submit" value="Delete" onclick="return confirm('Do you really want to delete this?');">
-      </form>
-    @endif
+          <h1>{{ $task->title }}</h1>
+          <p>{{ $task->contents }}</p>
 
-    <button type="button" onclick="location.href='{{ route('tasks.comments.create', $task->id) }}'">Add a Comment</button>
-    <a href="{{ route('tasks.comments.index', $task->id) }}">View Comments</a>
+          <div class="box">
+            @if (Auth::check() && $task->user_id === Auth::id() )
+              <button type="button" onclick="location.href='{{ route('tasks.edit', $task) }}'">Edit</button>
+              <form action="{{ route('tasks.destroy', $task->id) }}" method="post">
+                @csrf
+                <input type="submit" value="Delete" onclick="return confirm('Do you really want to delete this?');">
+            </form>
+            @endif
+          </div>
 
-    @if ($task->bookmarkedBy(auth()->user()))
-    <form action="{{ route('bookmark.destroy', $task->bookmarkByUser(auth()->user())) }}" method="POST">
-      @csrf
-      @method('DELETE')
-      <button type="submit">Delete from Bookmarks</button>
-      <i type="submit" class="fa-sharp fa-solid fa-bookmark"></i>
-    </form>
-    @else
-    <form action="{{ route('bookmark.store') }}" method="POST">
-      @csrf
-      <input type="hidden" name="task_id" value="{{ $task->id }}">
-      <button type="submit">Add to Bookmarks</button>
-    </form>
-    @endif
-  @endforeach
+          <div class="box">
+            <button type="button" onclick="location.href='{{ route('tasks.comments.create', $task->id) }}'">Add a Comment</button>
+            <button type="button" onclick="location.href='{{ route('tasks.comments.index', $task->id) }}'">View Comments</button>
+  
+            @if ($task->bookmarkedBy(auth()->user()))
+            <form action="{{ route('bookmark.destroy', $task->bookmarkByUser(auth()->user())) }}" method="POST">
+              @csrf
+              @method('DELETE')
+              <button type="submit">Delete from Bookmarks</button>
+              <i type="submit" class="fa-sharp fa-solid fa-bookmark"></i>
+            </form>
+            @else
+            <form action="{{ route('bookmark.store') }}" method="POST">
+              @csrf
+              <input type="hidden" name="task_id" value="{{ $task->id }}">
+              <button type="submit">Add to Bookmarks</button>
+            </form>
+            @endif
+          </div>
+        </ul>
+      @endforeach
+      {{ $tasks->links() }}
+  </div>
 </body>
 </html>

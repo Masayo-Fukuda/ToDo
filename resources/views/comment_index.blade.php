@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/index.css') }}" rel="stylesheet">
   <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
@@ -64,23 +65,30 @@
     </div>
   </nav>
 
-  <div>
-    <p class=title>Comments List</p>
+  <div class="title">
+    <p>All Comments</p>
+  </div>
+
+  <div class="task">
     @foreach($comments as $comment)
+      <div class="tasks">
         <div>
           <p>User:{{ $comment->user->name }}</p>
-          <p>Comment<br>{{ $comment->body }}</p>
+          <p>Comment:<br>{{ $comment->body }}</p>
         </div>
 
-        @if (Auth::check() && $comment->user_id === Auth::id())
+        <div>
+          @if (Auth::check() && $comment->user_id === Auth::id())
           <form action="{{ route('comments.destroy', $comment->id) }}" method="post">
             @csrf
             <input type="submit" value="Delete" onclick="return confirm('Do you really want to delete this?');">
           </form>
         @endif
+        </div>
+      </div>
     @endforeach
-    
+    <a class="button" href="{{ route('tasks.index') }}">Back to Tasks List</a>
   </div>
-  <a class="button" href="{{ route('tasks.index') }}">Back to Tasks List</a>
+
 </body>
 </html>

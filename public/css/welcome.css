@@ -1,0 +1,33 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.content {
+  width: 100vw;
+  height: 100vh;
+  background: url(../image/top-view.jpg)no-repeat center;
+  background-size: cover;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+
+p {
+  color: rgb(29, 24, 24);
+  font-size: 190px;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(29, 24, 24);
+  font-size: 70px;
+  padding: 10px;
+  background-color: rgba(77, 78, 78, 0.47);
+  border-radius: 5%;
+}
+
+a:hover {
+  background-color: rgba(10, 10, 10, 0.47);
+  color: rgba(198, 198, 198, 0.477);
+}

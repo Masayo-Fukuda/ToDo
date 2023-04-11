@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/create.css') }}">
   <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
@@ -64,19 +65,26 @@
     </div>
   </nav>
 
-  <div >
-    <p>Add a Comment</p>
-    <div>
+  <div class="title">
+    <p>Add a comment</p>
+  </div>
+
+  <div class="comment_box">
+    <div class="content">
       <h1>Title: {{ $tasks->title }}</h1>
       <p>User:{{ $tasks->user->name }}</p>
       <p>Content:{{ $tasks->contents }}</p>
+    </div>
+
+    <div class="content">
       <form action="{{ route('tasks.comments.store', '$task->id') }}" method="post">
         @csrf
         <input type="hidden" name="task_id" value="{{ $tasks->id }}">
         <textarea name="body" cols="50" rows="3" placeholder="Content"></textarea>
         @if ($errors->has('body'))
-              <p id="error">ERROR!{{$errors->first('body')}}</p>
-            @endif
+          <p id="error">ERROR!{{$errors->first('body')}}</p>
+        @endif
+        <br>
         <button type="submit">Add a Comment</button>
       </form>
     </div>

@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/create.css') }}">
   <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
@@ -64,30 +65,34 @@
     </div>
   </nav>
 
-  <div>Create New Task</div>
-  <form action="{{ route('tasks.store') }}" method="POST" >
-    @csrf
-    <div>
-      <label>Title less than 30 characters</label>
-      <input type="text" class="" placeholder="Title" name="title">
-      @if ($errors->has('title'))
-        <p>ERROR!{{$errors->first('title')}}</p>
-      @endif
-    </div>
+  <div class="title">
+    <p>Create</p>
+  </div>
 
-    <div>
-      <label>Content less than 140 characters</label>
-      <textarea placeholder="Content" rows="5" name="contents"></textarea>
-      @if ($errors->has('contents'))
-        <p>ERROR!{{$errors->first('contents')}}</p>
-      @endif
-    </div>
-    
-    <div>
-      <button type="submit" class="">Create</button>
-    </div>
+  <div class="box">
+    <form action="{{ route('tasks.store') }}" method="POST" >
+      @csrf
+      <div class="content">
+        <label>Title （less than 30 characters）</label>
+        <input type="text" class="" placeholder="Title" name="title">
+        @if ($errors->has('title'))
+          <p>ERROR!{{$errors->first('title')}}</p>
+        @endif
+      </div>
+  
+      <div class="content">
+        <label>Content （less than 140 characters）</label>
+        <textarea placeholder="Content" rows="5" name="contents"></textarea>
+        @if ($errors->has('contents'))
+          <p>ERROR!{{$errors->first('contents')}}</p>
+        @endif
+      </div>
+      
+        <button type="submit" class="">Create</button>
+  
+      <a href="{{ url()->previous() }}">Back</a>
+    </form>
+  </div>
 
-    <a href="{{ url()->previous() }}">Back</a>
-  </form>
 </body>
 </html>

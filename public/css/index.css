@@ -1,0 +1,37 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+.title {
+  font-size: 80px;
+  text-align: center;
+  background-color: rgb(153, 177, 213);
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  
+}
+
+.task {
+  background-color: rgb(153, 177, 213);
+  margin: 10px auto;
+  width: 70vw;
+  text-align: center;
+}
+
+.tasks{
+  border: 1px black solid;
+  margin: 10px auto;
+}
+
+#avatar {
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+}
