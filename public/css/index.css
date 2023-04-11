@@ -2,31 +2,51 @@ a {
   text-decoration: none;
   color: black;
 }
+
+
 .title {
-  font-size: 80px;
+  width: 40vw;
+  height: auto;
+  font-size: 30px;
+  margin: 10px auto;
   text-align: center;
   background-color: rgb(153, 177, 213);
+  border-radius: 10px;
 }
 
-.box {
+.button {
+  width: 10vw;
+  text-align: center;
+  font-size: 15px;
+  border: 2px solid rgb(153, 177, 213);
+  border-radius: 10px;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+.button:hover {
+  background-color: rgb(199, 219, 249);
+}
+
+.button > a:hover {
+  color: black;
+}
+
+.box-1 {
   display: flex;
   justify-content: center;
-  
+  align-items: center;
 }
 
 .task {
+  width:300px;
   background-color: rgb(153, 177, 213);
-  margin: 10px auto;
-  width: 70vw;
-  text-align: center;
-}
-
-.tasks{
-  border: 1px black solid;
+  border-radius: 10px;
   margin: 10px auto;
 }
 
 #avatar {
+  width: 50px;
   border: 1px solid black;
   border-radius: 50%;
 }
