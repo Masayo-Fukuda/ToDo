@@ -7,7 +7,6 @@
   <title>Document</title>
   <link href="{{ asset('css/header.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/index.css') }}">
-  <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
   <header>
@@ -26,7 +25,7 @@
                 <a href="{{ route('register') }}">{{ __('Register') }}</a>
             @endif
         @else
-            <a>{{ Auth::user()->name }}'s Page</a>
+            <a href="{{ route('my_page.show', Auth::user()->id ) }}">{{ Auth::user()->name }}'s Page</a>
             <a href="{{ route('logout') }}"
               onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">

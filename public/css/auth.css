@@ -1,0 +1,89 @@
+.card {
+  background-color: rgb(176, 192, 217);
+  width: 50vw;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  border: black solid 1px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.card-header {
+  background-color: rgb(176, 192, 217);
+  border-bottom: black solid 1px;
+  font-size: 30px;
+}
+
+.card-body {
+  background-color: rgb(176, 192, 217);
+  margin: 30px 0;
+  font-size: 20px;
+}
+
+.card-body-1 {
+  margin: 10px 0;
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-body-1 > label {
+  margin-left: 30px;
+}
+
+.card-body-2 {
+  margin: 10px 0;
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-body-2-1 {
+  margin: 10px 0;
+  display: flex;
+}
+
+.card-body-2 > label {
+  margin-left: 30px;
+}
+
+.card-body-2-1 > label {
+  margin-left: 30px;
+  margin-right: 157px;
+}
+
+.form-control {
+  width: 200px;
+}
+
+.check {
+  width: 500px;
+  text-align: right;
+}
+
+
+.card-body-3 > button {
+  width: 100px;
+  margin: 40px auto 10px;
+  background-color: rgb(153, 177, 213) ;
+  display: block;
+}
+
+.card-body-3 > button:hover {
+  background-color: rgb(129, 163, 213) ;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+}
+.link > a{
+  color: black;
+  font-size: 15px;
+}
+
+.link > a:hover {
+  color: #18465a;
+  font-size: 15px;
+}
