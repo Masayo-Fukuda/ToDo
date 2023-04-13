@@ -48,12 +48,19 @@
       @foreach ($tasks as $task)
       <div class="task">
         <div class="box-1">
-          <img id="avatar" src="{{ asset('storage/images/'. $task->user->avatar) }}" alt="">
-          <h2>{{ $task->user->name }}'s task</h2>
+          <div class="user">
+            <img id="avatar" src="{{ asset('storage/images/'. $task->user->avatar) }}" alt="">
+            <h2>{{ $task->user->name }}'s task</h2>
+          </div>
+
+
+          <div class="contents">
+            <h1>{{ $task->title }}</h1>
+            <p>{{ $task->contents }}</p>
+          </div>
         </div>
 
-        <h1>{{ $task->title }}</h1>
-        <p>{{ $task->contents }}</p>
+
 
         <div class="box">
           @if (Auth::check() && $task->user_id === Auth::id() )

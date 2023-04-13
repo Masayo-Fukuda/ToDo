@@ -33,9 +33,11 @@ a {
 }
 
 .box-1 {
+  
+}
+
+.user {
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .task {
@@ -43,6 +45,15 @@ a {
   background-color: rgb(153, 177, 213);
   border-radius: 10px;
   margin: 10px auto;
+}
+
+.contents {
+  width: 250px;
+}
+
+.contents > h1, p {
+  word-wrap: break-word;
+  margin: 0 auto ;
 }
 
 #avatar {
